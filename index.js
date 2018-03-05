@@ -19,7 +19,7 @@ export default (selector, options, stylesheet) => {
     if (options.every(test => features[test](tag))) {
 
       tag.setAttribute(`data-overflow-${attr}`, count)
-      styles += stylesheet.replace(/:self|\$this/, `[data-overflow-${attr}="${count}"]`)
+      styles += stylesheet.replace(/:self|\$this/g, `[data-overflow-${attr}="${count}"]`)
       count++
 
     } else {
