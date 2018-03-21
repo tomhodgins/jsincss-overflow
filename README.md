@@ -58,7 +58,7 @@ overflow(selector, options, stylesheet)
 
 This example will use the `jsincss` plugin to load a JS-in-CSS stylesheet making use of this plugin. To test it in a JavaScript module, import both the `jsincss` package and any helper plugins you want:
 
-```js
+```html
 <script type=module>
   import jsincss from 'https://unpkg.com/jsincss/index.js'
   import overflow from 'https://unpkg.com/jsincss-overflow/index.js'
