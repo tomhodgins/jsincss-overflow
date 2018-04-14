@@ -1,8 +1,5 @@
 export default (selector, options, stylesheet) => {
 
-  let styles = ''
-  let count = 0
-
   const features = {
     top: tag => tag.scrollTop > 0,
     right: tag => tag.scrollLeft + tag.offsetWidth < tag.scrollWidth,
@@ -12,24 +9,29 @@ export default (selector, options, stylesheet) => {
 
   options = Array.isArray(options) ? options : [options]
 
-  document.querySelectorAll(selector).forEach(tag => {
+  return Array.from(document.querySelectorAll(selector))
 
-    const attr = (selector+options.join('')).replace(/\W/g, '')
+    .reduce((styles, tag, count) => {
 
-    if (options.every(test => features[test](tag))) {
+      const attr = (selector+options.join('')).replace(/\W/g, '')
 
-      tag.setAttribute(`data-overflow-${attr}`, count)
-      styles += stylesheet.replace(/:self|\$this/g, `[data-overflow-${attr}="${count}"]`)
-      count++
+      if (options.every(test => features[test](tag))) {
 
-    } else {
+        tag.setAttribute(`data-overflow-${attr}`, count)
+        styles += stylesheet.replace(
+          /:self|\$this/g,
+          `[data-overflow-${attr}="${count}"]`
+        )
+        count++
 
-      tag.setAttribute(`data-overflow-${attr}`, '')
+      } else {
 
-    }
+        tag.setAttribute(`data-overflow-${attr}`, '')
 
-  })
+      }
 
-  return styles
+      return styles
+
+    }, '')
 
 }
