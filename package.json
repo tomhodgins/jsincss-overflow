@@ -1,6 +1,6 @@
 {
   "name": "jsincss-overflow",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An overflow-detecting plugin for jsincss",
   "main": "index.js",
   "directories": {
