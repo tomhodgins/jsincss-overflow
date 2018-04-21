@@ -3,6 +3,7 @@
   "version": "1.0.2",
   "description": "An overflow-detecting plugin for jsincss",
   "main": "index.js",
+  "module": "index.vanilla.js",
   "directories": {
     "test": "test"
   },
@@ -15,6 +16,7 @@
   },
   "keywords": [
     "jsincss",
+    "js-in-css",
     "overflow",
     "detector",
     "detecting",

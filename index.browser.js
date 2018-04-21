@@ -1,4 +1,4 @@
-module.exports = (selector, options, stylesheet) => {
+function overflow(selector, options, stylesheet) {
 
   const features = {
      top: tag => tag.scrollTop > 0,

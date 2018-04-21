@@ -36,10 +36,10 @@
 </div>
 
 <script type=module>
-  import jsincss from 'https://unpkg.com/jsincss/index.js'
-  import overflow from '../index.js'
+  import jsincss from 'https://unpkg.com/jsincss/index.vanilla.js'
+  import overflow from '../index.vanilla.js'
 
-  let stylesheet = () => `
+  jsincss(() => `
 
     .overflow {
       margin: 1em;
@@ -86,8 +86,13 @@
       }
     `)}
 
-  `
+  `, window, ['load', 'resize', 'reprocess'])
 
-  jsincss(stylesheet)
-  jsincss(stylesheet, '.overflow pre', ['scroll'])
+  let reprocess = new Event('reprocess')
+
+  document.querySelectorAll('.overflow pre').forEach(tag =>
+
+    tag.addEventListener('scroll', e => window.dispatchEvent(reprocess))
+
+  )
 </script>
