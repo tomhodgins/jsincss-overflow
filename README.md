@@ -50,7 +50,7 @@ The plugin has the following format:
 overflow(selector, options, stylesheet)
 ```
 
-- `selector` is a string containing a CSS selector list
+- `selector` is a string containing a CSS selector
 - `options` is a string containing one, or an array containing multiple of the following keywords: `top`, `right`, `bottom`, `left`
 - `stylesheet` is a string or template string containing a CSS stylesheet, where `:self` is a selector that can be used to target the element(s) that pass the test
 
