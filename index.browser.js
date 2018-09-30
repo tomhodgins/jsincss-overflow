@@ -22,8 +22,7 @@ function overflow(selector, options, stylesheet) {
           /:self|\$this/g,
           `[data-overflow-${attr}="${count}"]`
         )
-        count++
-
+  
       } else {
 
         tag.setAttribute(`data-overflow-${attr}`, '')
