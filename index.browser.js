@@ -19,7 +19,7 @@ function overflow(selector, options, stylesheet) {
 
         tag.setAttribute(`data-overflow-${attr}`, count)
         styles += stylesheet.replace(
-          /:self|\$this/g,
+          /:self|\$this|\[--self\]/g,
           `[data-overflow-${attr}="${count}"]`
         )
   
