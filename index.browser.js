@@ -1,36 +1,28 @@
 function overflow(selector, options, stylesheet) {
-
+  const attr = (selector + options).replace(/\W/g, '')
   const features = {
     top: tag => tag.scrollTop > 0,
     right: tag => tag.scrollLeft + tag.offsetWidth < tag.scrollWidth,
     bottom: tag => tag.scrollTop + tag.offsetHeight < tag.scrollHeight,
     left: tag => tag.scrollLeft > 0
   }
-
-  options = Array.isArray(options) ? options : [options]
-
-  return Array.from(document.querySelectorAll(selector))
-
-    .reduce((styles, tag, count) => {
-
-      const attr = (selector + options.join('')).replace(/\W/g, '')
-
+  const result = Array.from(document.querySelectorAll(selector))
+    .reduce((output, tag, count) => {
+      options = Array.isArray(options) ? options : [options]
       if (options.every(test => features[test](tag))) {
-
-        tag.setAttribute(`data-overflow-${attr}`, count)
-        styles += stylesheet.replace(
-          /:self|\$this|\[--self\]/g,
-          `[data-overflow-${attr}="${count}"]`
+        output.add.push({tag: tag, count: count})
+        output.styles.push(
+          stylesheet.replace(
+            /:self|\$this|\[--self\]/g,
+            `[data-overflow-${attr}="${count}"]`
+          )
         )
-  
       } else {
-
-        tag.setAttribute(`data-overflow-${attr}`, '')
-
+        output.remove.push(tag)
       }
-
-      return styles
-
-    }, '')
-
+      return output
+    }, {add: [], remove: [], styles: []})
+  result.add.forEach(tag => tag.tag.setAttribute(`data-overflow-${attr}`, tag.count))
+  result.remove.forEach(tag => tag.setAttribute(`data-overflow-${attr}`, ''))
+  return result.styles.join('\n')  
 }
